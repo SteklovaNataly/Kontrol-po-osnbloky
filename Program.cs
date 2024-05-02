@@ -5,134 +5,67 @@
 // [“1234”, “1567”, “-2”, “computer science”] → [“-2”]
 // [“Russia”, “Denmark”, “Kazan”] → []
 
-// Console.Write("Введите количество элементов массива: ");
-// int m = Convert.ToInt32(Console.ReadLine());
-// string [] stringArray = new string [m];
-// void array(string [] stringArray)
-// {
-//   for (int i = 0;i<stringArray.Length;i++)
-//   {
-//      Console.WriteLine($"Введите {i+1} элемент массива»);
-//      stringArray[i] = Console.ReadLine();
-//   }
-// }
-// string [] symbol(string [] stringArray)
-// {
-//   int n = 0;
-//   for (int i = 0;i<stringArray.Length;i++)
-//   {
-//     if(stringArray[i].Length <=3)
-//     n++;
-//   }
-//   string [] rez = new string [n];
-//   int j = 0;
-//   for (int i = 0;i<stringArray.Length;i++)
-//   {
-//     if(stringArray[i].Length <=3)
-//     {
-//         rez[j] = stringArray[i];
-//         j++;
-//     }
-//   }
-//   return rez;
-// }
-// void printA(string [] stringArray)
-// {
-//     Console.Write("[");
-//     for (int i = 0;i<stringArray.Length;i++)
-//     {
-//     Console.Write($"»"‘{stringArray[i]}’, "«");
-//     }
-//     Console.Write(«]»);
-// }
-// array(stringArray);
-// printA(symbol(stringArray));
 
-
-
-// // /Написать программу, которая из имеющегося массива строк формирует новый массив из строк, длина которых меньше, либо равна 3 символам.
-
-// Console.Write("Введите необходимое количество элементов массива: ");
-// int size = Convert.ToInt32(Console.ReadLine());
-
-// string[] array1 = new string[size];
-// for (int i = 0; i < size; i++)
-// {
-//     Console.Write($"Введите {i+1}-й элемент: ");
-//     string element = Convert.ToString(Console.ReadLine());
-//     array1[i] = element;
-// }
-
-// string [] array2 = new string [array1.Length];
-
-// void FinalArray (string [] array1, string [] array2)
-// {
-//     int pos = 0;
-//     for (int i = 0; i < array1.Length; i++)
-//     {
-//         if (array1[i].Length <= 3)
-//         {
-//         array2 [pos] = array1 [i];
-//         pos ++;
-//         }
-//     }
-// }
-// void PrintArray(string[] array)
-// {
-//     Console.Write("[");
-//     for (int i = 0; i < array.Length; i++)
-//     {
-//         Console.Write(array[i] + " ");
-//     }
-//     Console.Write("]");
-//     Console.WriteLine();
-// }
-// Console.WriteLine();
-// FinalArray(array1, array2);
-// PrintArray(array2);
-
-
+string[] EnterStringsToArray()
 {
-    static void Main()
+    Console.WriteLine("Введите количество строк: ");
+    int count = int.Parse(Console.ReadLine());
+
+    string[] workArray = new string[count];
+
+    Console.WriteLine($"Введите {count} строк(у) (после ввода каждой нажмите ENTER):");
+    for (int i = 0; i < count; i++)
     {
-        // Введите исходный массив строк
-        Console.WriteLine("Введите строки через запятую:");
-        string input = Console.ReadLine();
-        string[] originalStrings = input.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-        // Фильтруем строки длиной меньше или равной 3 символам
-        string[] filteredStrings = FilterStrings(originalStrings);
-
-        // Выводим результат
-        Console.WriteLine("Результат:");
-        foreach (string str in filteredStrings)
-        {
-            Console.WriteLine(str);
-        }
+        workArray[i] = Console.ReadLine();
     }
 
-    static string[] FilterStrings(string[] inputStrings)
-    {
-        int count = 0;
-        foreach (string str in inputStrings)
-        {
-            if (str.Length <= 3)
-            {
-                count++;
-            }
-        }
-
-        string[] result = new string[count];
-        int index = 0;
-        foreach (string str in inputStrings)
-        {
-            if (str.Length <= 3)
-            {
-                result[index] = str;
-                index++;
-            }
-        }
-
-        return result;
-    }
+    return workArray;
 }
+
+string[] CreatingArrayStringsLessThan3(string[] workArray)
+{
+    int count = 0;
+    foreach (string item in workArray)
+    {
+        if (item.Length <= 3)
+        {
+            count++;
+        }
+    }
+    string[] result = new string[count];
+    int i = 0;
+    foreach (string item in workArray)
+    {
+        if (item.Length <= 3)
+        {
+            result[i] = item;
+            i++;
+        }
+    }
+
+    return result;
+}
+
+string PrintArray(string[] workArray)
+{
+    string arString = "[";
+    for (int i = 0; i < workArray.Length; i++)
+    {
+        arString += $"\"{workArray[i]}\"";
+        if (i < workArray.Length - 1)
+        {
+            arString += ", ";
+        }
+    }
+    arString += "]";
+    return arString;
+}
+
+string[] workArray = EnterStringsToArray();
+string[] result = CreatingArrayStringsLessThan3(workArray);
+string firstArray = PrintArray(workArray);
+string secondArray = PrintArray(result);
+
+Console.WriteLine(firstArray + " -> " + secondArray);
+
+
